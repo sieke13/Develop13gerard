@@ -1,4 +1,5 @@
 export interface Candidate {
+  name: string | undefined;
   id: number;
  username: string;
   avatar: string;

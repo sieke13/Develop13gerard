@@ -22,14 +22,15 @@ const CandidateSearch = () => {
 
       const candidateData = await searchGithubUser(response[0].login);
       const newCandidate: Candidate = {
-        id: candidateData.id,
         login: response[0].login,
         avatar: candidateData.avatar_url,
         username: candidateData.node_id,
         location: candidateData.location,
         email: candidateData.email,
         company: candidateData.company,
-        bio: candidateData.bio
+        bio: candidateData.bio,
+        name: candidateData.name,
+        id: candidateData.id
       }
       setCurrentCandidate(newCandidate);
     }
@@ -44,14 +45,15 @@ const CandidateSearch = () => {
         const candidateData = await searchGithubUser(filteredCandidates[0]);
         if (candidateData) {
           setCurrentCandidate({
-            id: candidateData.id,
             login: candidateData.login,
             avatar: candidateData.avatar_url,
             username: candidateData.node_id,
             location: candidateData.location,
             email: candidateData.email,
             company: candidateData.company,
-            bio: candidateData.bio
+            bio: candidateData.bio,
+            name: candidateData.name,
+            id: candidateData.id
           });
         }
       } catch (err) {
@@ -60,14 +62,15 @@ const CandidateSearch = () => {
       }
     } else {
       setCurrentCandidate({
-        id: 0,
         login: "No more candidates",
         avatar: img_avatar,
         username: "",
         location: "",
         email: "",
         company: "",
-        bio: ""
+        bio: "",
+        name: "",
+        id: 0
       })
     };
   }
@@ -83,7 +86,8 @@ const CandidateSearch = () => {
         location: candidateData.location, 
         email: candidateData.email, 
         company: candidateData.company, 
-        bio: candidateData.bio 
+        bio: candidateData.bio,
+        name: candidateData.name
       };
       setSelectedCandidates([...selectedCandidates, newCandidate]);
       nextUser();
